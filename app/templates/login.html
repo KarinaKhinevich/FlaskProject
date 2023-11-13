@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> Sign In</h1>
+    <!--action используется чтобы сообщить браузеру URL который должен использоваться при отправке информацииб если пустое, то использоваться URL из адреной строки-->
+    <!--method указывает метод HTTP запроса-->
+    <!--novalidate используется для указания веб-браузеру не применять проверку к полям в этой форме-->
+    <form action = "" method ="post" novalidate> 
+        <!--form.hidden_tag() создает скрытое поле, содержащее токен, используемый для защиты формы от атак CSRF-->
+        {{form.hidden_tag()}}
+        <p>
+            {{ form.username.label}}<br>
+            {{ form.username(size = 32) }}<br>
+            <!--Отображение ошибок при заполнении полей-->
+            {% for error in form.username.errors %}
+            <span style="color:red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label}}<br>
+            {{ form.password(size = 32) }}<br>
+            <!--Отображение ошибок при заполнении полей-->
+            {% for error in form.password.errors %}
+            <span style="color:red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }}{{form.remember_me.label}}</p>
+        <p>{{ form.submit() }}</p>
+        </p>
+    </form>
+{% endblock %}

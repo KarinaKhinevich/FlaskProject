@@ -1,0 +1,29 @@
+<html>
+    <head>
+        {% if title %}
+        <title> {{ title }} - Microblog</title>
+        {% else %}
+        <title> Welcome to Microblog</title>
+        {% endif %}
+    </head>
+    <body>
+       <div> 
+            Microblog: 
+            <!--url_for() гененрирует URL адрес для указанной ф-и представления-->
+            <a href = "{{ url_for('index') }}">Home</a> 
+            <a href = "{{ url_for('login') }}">Sign In</a>
+        </div>
+       <hr>
+       <!--отображение flash сообщений-->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{message}}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+       {%block content %} {% endblock %}
+    </body>
+</html>
